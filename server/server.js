@@ -1,6 +1,8 @@
+require("dotenv").config()
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT
+//process.env : 환경변수에 접근시 사용하는 내장 자바스크립트 객체
 const db = require('./dbconfig/db');
 
 app.get('/hello', (req, res) => {
@@ -15,6 +17,7 @@ app.get('/topic', (req, res) => {
             res.send(err);
         }
     })
+    console.log('serverside');
 })
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)
