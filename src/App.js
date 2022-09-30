@@ -8,7 +8,6 @@ function App() {
   
   const onIncrease = async() => {
     const res = await axios.get('/topic');
-    //topic = [...res.data.topic];
     setData([...res.data.topic]);
   }
 
