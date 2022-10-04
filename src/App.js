@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import Topic from './topic';
+import Topic from './components/topic';
 
 
 function App() {
