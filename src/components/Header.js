@@ -3,11 +3,12 @@ import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 
 export default function Header(props) {
     const { title } = props;
     return (
-        <div>
+        <Box>
             <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Typography
                     component="h2"
@@ -28,6 +29,6 @@ export default function Header(props) {
                     </Button>
                 </Stack>
             </Toolbar>
-        </div>
+        </Box>
     );
 }

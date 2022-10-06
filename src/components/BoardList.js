@@ -1,5 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const datas = [
     {
@@ -28,7 +30,11 @@ const datas = [
     }
 ];
 
-export default function BoardTable() {
+const StyledLink = styled(Link)`
+    color: black;
+`;
+
+export default function BoardList() {
 
     return (
         <Table bordered hover>
@@ -47,7 +53,9 @@ export default function BoardTable() {
                     
                     <tr key={data.id}>
                         <td>{data.id}</td>
-                        <td>{data.title}</td>
+                        <td>
+                            <StyledLink to={`/board/${data.title}`}>{data.title}</StyledLink>
+                        </td>
                         <td>{data.username}</td>
                         <td>{data.date}</td>
                         <td>{data.hits}</td>
