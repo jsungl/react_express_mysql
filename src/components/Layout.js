@@ -16,8 +16,8 @@ const Layout = () => {
 
 
     return (
-        <Container sx={{height: "100%", display: "flex", flexDirection: "column"}}>
-            <Box sx={{height: "100%", flex:1}}>
+        <Container sx={{height: "100vh", display: "flex", flexDirection: "column"}}>
+            <Box sx={{flex:1}}>
                 <header>
                     <Header title={title} />
                 </header>

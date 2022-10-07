@@ -6,23 +6,34 @@ const db = require('./dbconfig/db');
 
 app.set('view engine', 'ejs');
 
-app.get('/hello', (req, res) => {
-  res.send({number:1})
+// app.get('/hello', (req, res) => {
+//   res.send({number:1})
+// })
+
+// app.get('/hello/:num', (req, res) => {
+//   res.render('test',{num:req.params.num})
+// })
+
+app.get('/boardList',(req, res) => {
+  db.query('SELECT * FROM board',(err, data) => {
+    if(!err){
+        res.send(data);
+    } else {
+        res.send(err);
+    }
+  })
 })
 
-app.get('/hello/:num', (req, res) => {
-  res.render('test',{num:req.params.num})
-})
+// app.get('/topic', (req, res) => {
+//     db.query('SELECT * FROM topic_backup',(err, data) => {
+//         if(!err){
+//             res.send({topic:data});
+//         } else {
+//             res.send(err);
+//         }
+//     })
+// })
 
-app.get('/topic', (req, res) => {
-    db.query('SELECT * FROM topic_backup',(err, data) => {
-        if(!err){
-            res.send({topic:data});
-        } else {
-            res.send(err);
-        }
-    })
-})
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)
 })
