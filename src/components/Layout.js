@@ -17,10 +17,8 @@ const Layout = () => {
 
     return (
         <Container sx={{height: "100vh", display: "flex", flexDirection: "column"}}>
+            <Header title={title} />
             <Box sx={{flex:1}}>
-                <header>
-                    <Header title={title} />
-                </header>
                 <main>
                     <DivBlock>
                         <Outlet />

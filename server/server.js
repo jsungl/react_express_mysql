@@ -14,6 +14,7 @@ app.set('view engine', 'ejs');
 //   res.render('test',{num:req.params.num})
 // })
 
+//전체 게시글 조회 
 app.get('/boardList',(req, res) => {
   db.query('SELECT * FROM board',(err, data) => {
     if(!err){
@@ -24,15 +25,16 @@ app.get('/boardList',(req, res) => {
   })
 })
 
-// app.get('/topic', (req, res) => {
-//     db.query('SELECT * FROM topic_backup',(err, data) => {
-//         if(!err){
-//             res.send({topic:data});
-//         } else {
-//             res.send(err);
-//         }
-//     })
-// })
+//특정 게시글 조회
+app.get('/boardContent',(req, res) => {
+  db.query('SELECT * FROM board WHERE board_no = ?',[req.query.postId],(err, data) => {
+    if(!err) {
+      res.send(data);
+    } else {
+      res.send(err);
+    }
+  })
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)

@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 export default function Header(props) {
     const { title } = props;
     return (
-        <Box>
+        <Box component="header">
             <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Typography
                     component="h2"

@@ -1,6 +1,5 @@
 import React from 'react';
 //import axios from 'axios';
-//import Topic from '../topic';
 import BoardList from '../BoardList';
 //import 'bootstrap/dist/css/bootstrap.min.css';
 //import Button from '@mui/material/Button';
