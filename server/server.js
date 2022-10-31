@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 //데이터 총 개수, 1번째 페이지(0~10) 데이터 조회
 app.get('/totalCount',(req, res) => {
   const sql1 = 'SELECT count(*) count FROM board;';
-  const sql2 = 'SELECT * FROM board limit 10 offset 0';
+  const sql2 = 'SELECT * FROM board ORDER BY board_no desc limit 10 offset 0';
   db.query(sql1+sql2,(err, data) => {
     if(!err){
         res.send(data);
@@ -73,7 +73,7 @@ app.get('/boardList',(req, res) => {
         mainSQL += ' ORDER BY board_no desc limit ? offset ?';
         break;
   }
-  console.log(mainSQL);
+  //console.log(mainSQL);
 
   db.query(mainSQL,[Number(req.query.limit),Number(req.query.offset)],(err, data) => {
     if(!err){

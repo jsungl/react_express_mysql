@@ -27,27 +27,48 @@ export default function Board() {
     const [date,setDate] = useState('');
     const [hits,setHits] = useState(0);
     const [up,setUp] = useState(0);
+    //const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
-            try{
-                const res = await axios.get('/boardContent', {
+            await axios
+                .get('/boardContent', {
                     // param 으로 postId 값을 넘겨준다.
                     params: {
                         'postId': postId
                     }
                 })
-                //console.log('res',res);
-                setTitle(res.data[0].board_title);
-                setContent(res.data[0].board_content);
-                setWriter(res.data[0].board_user);
-                setDate(res.data[0].enroll_date.substring(0,10));
-                setHits(res.data[0].hits);
-                setUp(res.data[0].up);
+                .then((res) => {
+                    setTitle(res.data[0].board_title);
+                    setContent(res.data[0].board_content);
+                    setWriter(res.data[0].board_user);
+                    setDate(res.data[0].enroll_date.substring(0,10));
+                    setHits(res.data[0].hits);
+                    setUp(res.data[0].up);
+                    console.log('------------------Board Rendering Init------------------');
+                })
+                .catch((e) => {
+                    console.error(e.message);
+                });
+            
+            // try{
+            //     const res = await axios.get('/boardContent', {
+            //         // param 으로 postId 값을 넘겨준다.
+            //         params: {
+            //             'postId': postId
+            //         }
+            //     })
+            //     //console.log('res',res);
+            //     setTitle(res.data[0].board_title);
+            //     setContent(res.data[0].board_content);
+            //     setWriter(res.data[0].board_user);
+            //     setDate(res.data[0].enroll_date.substring(0,10));
+            //     setHits(res.data[0].hits);
+            //     setUp(res.data[0].up);
 
-            } catch(e) {
-                console.error(e.message)
-            }
+            // } catch(e) {
+            //     console.error(e.message)
+            // }
         };
         fetchData();
     },[postId]);

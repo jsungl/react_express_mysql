@@ -1,93 +1,32 @@
-import React, {useState,useEffect} from 'react';
+import React from 'react';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Pagination from 'react-js-pagination';
+import '../style/pagination.css';
 
-const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
-  const [currentPageArray, setCurrentPageArray] = useState([]);
-  const [totalPageArray, setTotalPageArray] = useState([]);
+export default function PaginationComponent({page,totalCount,postPerPage,onChangePage}) {
 
-  useEffect(() => {
-    if(currentPage % 5 === 1){
-      //다음버튼 눌러서 page: 6, 11, 16, 21, ....가 되는경우
-      setCurrentPageArray(totalPageArray[Math.floor(currentPage / 5)]);
-    }else if (currentPage % 5 === 0) {
-      //이전버튼 눌러서 page: 5, 10, 15, 20, ....가 되는경우
-      setCurrentPageArray(totalPageArray[Math.floor(currentPage / 5) - 1]);
-    }
-    console.log('Pagination Component Rendering 1');
-  },[currentPage, totalPageArray]);
+    return (
+        <Grid 
+            container 
+            justifyContent="center"
+        >
+            <Grid item xs={12} sm="auto">
+                <Box display="flex" justifyContent="center" alignItems="center">
+                    <Pagination 
+                        activePage={page || 1} // 현재 페이지 번호
+                        itemsCountPerPage={postPerPage} // 한 페이지당 보여줄 데이터 갯수
+                        totalItemsCount={totalCount} // 총 데이터 갯수
+                        pageRangeDisplayed={5} // 한번에 보여줄 페이지 번호 갯수
+                        prevPageText={"이전"} // "이전"을 나타낼 텍스트
+                        nextPageText={"다음"} // "다음"을 나타낼 텍스트
+                        firstPageText={"처음"}
+                        lastPageText={"끝"}
+                        onChange = {onChangePage} // 페이지 변경시 호출되는 함수
+                    />
+                </Box>
+            </Grid>    
+        </Grid>
+    );
 
-  useEffect(() => {
-    function sliceArrayByLimit(totalPage,limit) {
-      const pageNumbers = [...Array(nPages + 1).keys()].slice(1); //[1,2,3,....30]
-      return Array(Math.ceil(totalPage / limit)).fill().map(() => pageNumbers.splice(0, limit));
-    }
-    const slicedPageArray = sliceArrayByLimit(nPages, 5);
-    //console.log('slicedPageArray: ', slicedPageArray); //[ [1,2,3,4,5],[6,7,8,9,10],...]
-    setTotalPageArray(slicedPageArray);
-    setCurrentPageArray(slicedPageArray[0]);
-    console.log('Pagination Component Rendering 2');
-  },[nPages]);
-
-  const nextPage = () => {
-    if(currentPage !== nPages) 
-      setCurrentPage(currentPage + 1)
-  }
-  const prevPage = () => {
-    if(currentPage !== 1) 
-      setCurrentPage(currentPage - 1)
-  }
-  const firstPage = () => {
-    setCurrentPage(1);
-  }
-  const lastPage = () => {
-    setCurrentPage(nPages);
-  }
-
-  const style = {
-    margin:0
-  };
-
-  return (
-      <nav>
-        <ul className='pagination' style={style}>
-            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-              <a className="page-link" href="/#" onClick={firstPage}>
-                &laquo;
-              </a>
-            </li>
-            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-              <a className="page-link" 
-                  onClick={prevPage} 
-                  href='/#'>
-                  &lt;
-              </a>
-            </li>
-            {currentPageArray.map(pgNumber => (
-                <li key={pgNumber} 
-                    className= {`page-item ${currentPage === pgNumber ? 'active' : ''} `} >
-
-                    <a onClick={() => setCurrentPage(pgNumber)}  
-                        className='page-link' 
-                        href='/#'>
-                        {pgNumber}
-                    </a>
-                </li>
-            ))}
-            <li className={`page-item ${currentPage === nPages ? 'disabled' : ''}`}>
-              <a className="page-link" 
-                  onClick={nextPage}
-                  href='/#'>
-                  &gt;
-              </a>
-            </li>
-            <li className={`page-item ${currentPage === nPages ? 'disabled' : ''}`}>
-              <a className="page-link" href="/#" onClick={lastPage}>
-                &raquo;
-              </a>
-            </li>
-        </ul>
-      </nav>
-    
-  );
-};
-
-export default Pagination;
+}

@@ -24,3 +24,7 @@ yarn-error.log*
 
 #.env
 .env
+
+# components
+Pagination_copy.js
+BoardList_copy.js
