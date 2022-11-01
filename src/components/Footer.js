@@ -9,7 +9,7 @@ function Copyright() {
     return (
       <Typography variant="body2" color="text.secondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://mui.com/">
+        <Link color="#337ab7" href="https://mui.com/">
           Your Website
         </Link>
         {' '}

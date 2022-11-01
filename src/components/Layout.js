@@ -7,12 +7,12 @@ import Footer from './Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Layout = () => {
-    const title = 'Board';
+    const title = 'Mini Board';
 
     return (
         <Container sx={{height: "100vh", display: "flex", flexDirection: "column"}}>
             <Header title={title} />
-            <Box component="main" sx={{flex:1, mt:"30px", mb:"30px"}}>
+            <Box component="main" sx={{flex:1, mt:"50px", mb:"50px"}}>
                 <Outlet />
             </Box>
             <Footer></Footer>

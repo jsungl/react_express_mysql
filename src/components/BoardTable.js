@@ -1,74 +1,77 @@
 import React from 'react';
-import Table from 'react-bootstrap/Table';
+//import Table from 'react-bootstrap/Table';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 const StyledLink = styled(Link)`
     color: black;
 `;
 
-const StyledTable = styled(Table)`
-    border-top: 2px solid rgba(0, 0, 0, 0.12); 
-    border-bottom: 2px solid rgba(0, 0, 0, 0.12); 
-`;
-
 export default function BoardTable({post}) {
 
-    const tdStyle = {
-        textAlign:'center',
-        padding:30
-    }
+    const theadTitle = [
+        {name:'No.'},
+        {name:'제목'},
+        {name:'글쓴이'},
+        {name:'날짜'},
+        {name:'조회수'},
+        {name:'추천수'},
+    ];
 
     return (
         <>
+            <TableContainer sx={{mb:2}}>
             {post.length !== 0 ? (
-                <StyledTable hover>
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>제목</th>
-                            <th>글쓴이</th>
-                            <th>날짜</th>
-                            <th>조회수</th>
-                            <th>추천수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            post.map(data => (
-                                <tr key={data.no}>
-                                    <td>{data.no}</td>
-                                    <td>
-                                        <StyledLink to={`/board/${data.no}`}>{data.title}</StyledLink>
-                                    </td>
-                                    <td>{data.userId}</td>
-                                    <td>{data.date}</td>
-                                    <td>{data.hits}</td>
-                                    <td>{data.up}</td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </StyledTable>
+                <Table sx={{ minWidth: 650}} aria-label="simple table">
+                    <TableHead sx={{background:'#F6F6F6',borderTop: "1px solid #ccc"}}>
+                        <TableRow>
+                            {theadTitle.map((item) => (
+                                <TableCell align="center" sx={{fontWeight:'bold'}}>{item.name}</TableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {post.map((data) => (
+                            <TableRow
+                                hover
+                                key={data.no}
+                                sx={{
+                                    '&:not(:last-child) td':{borderBottom:"2px solid #F6F6F6"}
+                                }}
+                            >
+                                <TableCell align="center">{data.no}</TableCell>
+                                <TableCell align="center"><StyledLink to={`/board/${data.no}`}>{data.title}</StyledLink></TableCell>
+                                <TableCell align="center">{data.userId}</TableCell>
+                                <TableCell align="center">{data.date}</TableCell>
+                                <TableCell align="center">{data.hits}</TableCell>
+                                <TableCell align="center">{data.up}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
             ) : (
-                <StyledTable>
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>제목</th>
-                        <th>글쓴이</th>
-                        <th>날짜</th>
-                        <th>조회수</th>
-                        <th>추천수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colSpan={6} style={tdStyle}>등록된 글이 없습니다.</td>
-                    </tr>
-                </tbody>
-                </StyledTable>)
+                <Table sx={{ minWidth: 650}} aria-label="simple table">
+                    <TableHead sx={{background:'#F6F6F6',borderTop: "1px solid #ccc"}}>
+                        <TableRow>
+                            {theadTitle.map((item) => (
+                                <TableCell align="center" sx={{fontWeight:'bold'}}>{item.name}</TableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell align="center" colSpan={6}>등록된 글이 없습니다.</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>)
             }
+            </TableContainer>
         </>
     )
 }
