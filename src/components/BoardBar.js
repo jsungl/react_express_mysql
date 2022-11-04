@@ -39,7 +39,7 @@ export default function BoardBar({onClickHome,onChangeAlign,align}) {
                 <Button
                     key={item.name}
                     sx={{
-                        color: align === item.name ? '#337ab7' : '#444',
+                        color: (align || 'board_no') === item.name ? '#337ab7' : '#444',
                         display: 'block',
                         fontWeight:'bold',
                         '&:hover': {

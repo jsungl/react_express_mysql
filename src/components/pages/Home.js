@@ -1,24 +1,25 @@
-import React, {useEffect, useState, useRef} from 'react';
-import { useNavigate, useSearchParams, createSearchParams } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+//import { useNavigate, useSearchParams, createSearchParams, useOutletContext } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import axios from 'axios';
 import Pagination from '../Pagination';
 import Table from '../BoardTable';
 import BoardBar from '../BoardBar';
-import SearchBar from '../SearchBar';
+//import SearchBar from '../SearchBar';
 
 
 export default function Home() {
-    const [params] = useSearchParams();
+    const [params] = useOutletContext();
+    //const [params] = useSearchParams();
     const queryTarget = params.get('search_target') === null ? 'title_content' : params.get('search_target');
     const queryKeyword = params.get('search_keyword') === null ? '' : params.get('search_keyword');
     const align = params.get('align') === null ? 'board_no' : params.get('align');
     const currentPage = params.get('page') === null ? 1 : params.get('page');
     const [post,setPost] = useState([]);
     const [totalCount,setTotalCount] = useState(0);
-    const [keyword,setKeyword] = useState(queryKeyword);
-    const [target,setTarget] = useState(queryTarget);
+    // const [keyword,setKeyword] = useState(queryKeyword);
+    // const [target,setTarget] = useState(queryTarget);
     const postPerPage = 10; //페이지당 보여줄 데이터 개수
-    const searchText = useRef(null); //검색 TextField enter 입력시 focus out
     
     const navigate = useNavigate();
 
@@ -63,14 +64,14 @@ export default function Home() {
     };
 
     //검색 필드(textfield) 값 변경될 때마다 호출
-    const onChangeInput = (event) => {
-        setKeyword(event.target.value);
-    };
+    // const onChangeInput = (event) => {
+    //     setKeyword(event.target.value);
+    // };
 
     //검색 select 선택시 호출
-    const onChangeTarget = (event) => {
-        setTarget(event.target.value);
-    };
+    // const onChangeTarget = (event) => {
+    //     setTarget(event.target.value);
+    // };
     
     //페이지 변경시 호출
     const onChangePage = (nextPage) => {
@@ -87,30 +88,30 @@ export default function Home() {
     };
     
     //검색 form 전송시 호출
-    const searchKeyword = (event) => {
-        event.preventDefault();
-        searchText.current.blur();
-        navigate({
-            pathname: '/list',
-            search:`?${createSearchParams({
-                search_target: target,
-                search_keyword: keyword
-            })}`
-        });
-        console.log('-------------Search Form Submit------------');
-    };
+    // const searchKeyword = (event) => {
+    //     event.preventDefault();
+    //     searchText.current.blur();
+    //     navigate({
+    //         pathname: '/list',
+    //         search:`?${createSearchParams({
+    //             search_target: target,
+    //             search_keyword: keyword
+    //         })}`
+    //     });
+    //     console.log('-------------Search Form Submit------------');
+    // };
     
 
     console.log('posts: ', post);
     console.log('totalCount: ', totalCount);
     console.log('align: ', align);
-    console.log('keyword: ', keyword);
-    console.log('target: ', target);
+    console.log('keyword: ', queryKeyword);
+    console.log('target: ', queryTarget);
     console.log('currentPage: ', currentPage);
 
     return (
             <>
-                <SearchBar target={target} searchKeyword={searchKeyword} searchText={searchText} onChangeTarget={onChangeTarget} onChangeInput={onChangeInput}/>
+                {/* <SearchBar target={target} searchKeyword={searchKeyword} searchText={searchText} onChangeTarget={onChangeTarget} onChangeInput={onChangeInput}/> */}
                 <BoardBar onClickHome={onClickHome} onChangeAlign={onChangeAlign} align={align}/>
 
                 <Table post={post}/>

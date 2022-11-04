@@ -16,12 +16,12 @@ const StyledLink = styled(Link)`
 export default function BoardTable({post}) {
 
     const theadTitle = [
-        {name:'No.'},
-        {name:'제목'},
-        {name:'글쓴이'},
-        {name:'날짜'},
-        {name:'조회수'},
-        {name:'추천수'},
+        {no:1,name:'No.'},
+        {no:2,name:'제목'},
+        {no:3,name:'글쓴이'},
+        {no:4,name:'날짜'},
+        {no:5,name:'조회수'},
+        {no:6,name:'추천수'},
     ];
 
     return (
@@ -32,7 +32,7 @@ export default function BoardTable({post}) {
                     <TableHead sx={{background:'#F6F6F6',borderTop: "1px solid #ccc"}}>
                         <TableRow>
                             {theadTitle.map((item) => (
-                                <TableCell align="center" sx={{fontWeight:'bold'}}>{item.name}</TableCell>
+                                <TableCell key={item.no} align="center" sx={{fontWeight:'bold'}}>{item.name}</TableCell>
                             ))}
                         </TableRow>
                     </TableHead>
@@ -60,7 +60,7 @@ export default function BoardTable({post}) {
                     <TableHead sx={{background:'#F6F6F6',borderTop: "1px solid #ccc"}}>
                         <TableRow>
                             {theadTitle.map((item) => (
-                                <TableCell align="center" sx={{fontWeight:'bold'}}>{item.name}</TableCell>
+                                <TableCell key={item.no} align="center" sx={{fontWeight:'bold'}}>{item.name}</TableCell>
                             ))}
                         </TableRow>
                     </TableHead>

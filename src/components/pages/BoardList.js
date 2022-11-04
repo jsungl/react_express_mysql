@@ -1,27 +1,30 @@
-import React, {useEffect, useState, useRef, useCallback} from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+//import { useNavigate, useSearchParams, useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Table from '../BoardTable';
 import BoardBar from '../BoardBar';
 import Pagination from '../Pagination';
-import SearchBar from '../SearchBar';
+//import SearchBar from '../SearchBar';
 
 export default function BoardList() {
-    const [params, setParams] = useSearchParams();
+    const [params,setParams] = useOutletContext();
+    //const [params, setParams] = useSearchParams();
     const page = Number(params.get('page'));
     const align = params.get('align');
     const queryKeyword = params.get('search_keyword');
     const queryTarget = params.get('search_target');
     const [post,setPost] = useState([]); //데이터 목록
     const [totalCount,setTotalCount] = useState(0); //보여줄 데이터 개수
-    const [keyword,setKeyword] = useState(queryKeyword || ''); //검색어
-    const [target,setTarget] = useState(queryTarget || 'title_content'); //검색 방법(기본값 제목+내용)
+    // const [keyword,setKeyword] = useState(queryKeyword || ''); //검색어
+    // const [target,setTarget] = useState(queryTarget || 'title_content'); //검색 방법(기본값 제목+내용)
     //const [align, setAlign] = useState('board_no'); //정렬방법(기본값 최신순)
     //const [currentPage, setCurrentPage] = useState(Number(pageNum)); //현재 페이지
     const postPerPage = 10; //페이지당 보여줄 데이터 개수
     
-    const searchText = useRef(null); //검색 TextField enter 입력시 focus out
+    //const searchText = useRef(null); //검색 TextField enter 입력시 focus out
     const navigate = useNavigate();
+
     //const {pathname, search} = useLocation();
     //const currentPath = pathname + search; 현재 페이지 주소(쿼리스트링 포함)
     
@@ -87,14 +90,14 @@ export default function BoardList() {
     }
 
     //검색 필드(textfield) 값 변경될 때마다 호출
-    const onChangeInput = useCallback((event) => {
-        setKeyword(event.target.value);
-    },[]);
+    // const onChangeInput = useCallback((event) => {
+    //     setKeyword(event.target.value);
+    // },[]);
 
     //검색 select 선택시 호출되는 함수
-    const onChangeTarget = useCallback((event) => {
-        setTarget(event.target.value);
-    },[]);
+    // const onChangeTarget = useCallback((event) => {
+    //     setTarget(event.target.value);
+    // },[]);
     
     //페이지 변경시 호출되는 함수
     const onChangePage = (nextPage) => {
@@ -139,30 +142,31 @@ export default function BoardList() {
     //홈 버튼 클릭시 호출
     const onClickHome = () => {
         navigate('/');
+        //window.location.href = '/';
         console.log('-----------Click Home----------');
     };
     
     //Search Form Submit
-    const searchKeyword = (event) => {
-        event.preventDefault();
-        searchText.current.blur();
-        setParams({search_target:target,search_keyword:keyword});
-    };
+    // const searchKeyword = (event) => {
+    //     event.preventDefault();
+    //     searchText.current.blur();
+    //     setParams({search_target:target,search_keyword:keyword});
+    // };
     
 
     console.log('posts: ', post);
     console.log('totalCount: ', totalCount);
     console.log('align: ', align);
-    console.log('keyword: ', keyword);
-    console.log('target: ', target);
+    console.log('keyword: ', queryKeyword);
+    console.log('target: ', queryTarget);
     console.log('page: ', page);
 
 
 
     return (
             <>
-                <SearchBar target={target} searchKeyword={searchKeyword} searchText={searchText} onChangeTarget={onChangeTarget} 
-                    onChangeInput={onChangeInput} keyword={keyword}/>
+                {/* <SearchBar target={target} searchKeyword={searchKeyword} searchText={searchText} onChangeTarget={onChangeTarget} 
+                    onChangeInput={onChangeInput} keyword={keyword}/> */}
 
                 <BoardBar onClickHome={onClickHome} onChangeAlign={onChangeAlign} align={align}/>
 
