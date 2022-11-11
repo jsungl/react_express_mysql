@@ -28,3 +28,6 @@ yarn-error.log*
 # components
 Pagination_copy.js
 BoardList_copy.js
+
+#craco
+craco.config.js
