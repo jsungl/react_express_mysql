@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -6,7 +7,7 @@ import SvgIcon from '@mui/material/SvgIcon';
 
 
 export default function BoardBar({onClickHome,onChangeAlign,align}) {
-    
+    const navigate = useNavigate();
     const alignItems = [
         {name:'board_no',role:'최신순'},
         {name:'hits',role:'조회순'},
@@ -54,7 +55,7 @@ export default function BoardBar({onClickHome,onChangeAlign,align}) {
                 </Button>
             ))}
             <Box sx={{flexGrow:1}}/>
-            <Button variant='outlined' sx={{mr:1}}>글쓰기</Button>
+            <Button variant='outlined' sx={{mr:1}} onClick={()=>navigate('/boardWrite')}>글쓰기</Button>
         </Box>
     );
 }

@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,7 @@
   to {
     transform: rotate(360deg);
   }
+} */
+.ck-editor__editable_inline:not(.ck-editor__nested-editable) {
+  min-height: 400px;
 }

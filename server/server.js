@@ -73,7 +73,6 @@ app.get('/boardList',(req, res) => {
         mainSQL += ' ORDER BY board_no desc limit ? offset ?';
         break;
   }
-  //console.log(mainSQL);
 
   db.query(mainSQL,[Number(req.query.limit),Number(req.query.offset)],(err, data) => {
     if(!err){

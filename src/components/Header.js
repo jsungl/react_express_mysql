@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
@@ -38,6 +39,7 @@ export default function Header({target,keyword,setKeyword,setTarget,searchKeywor
     const title = 'Mini Board';
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [checked, setChecked] = useState(false);
+    const navigate = useNavigate();
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
@@ -58,6 +60,16 @@ export default function Header({target,keyword,setKeyword,setTarget,searchKeywor
     const onClickSearchIcon = (event) => {
         setChecked((prev) => !prev);
     };
+
+    const onClickLoginMenu = () => {
+        setAnchorElUser(null);
+        navigate('/login');
+    }
+
+    const onClickJoinMenu = () => {
+        setAnchorElUser(null);
+        navigate('/signUp');
+    }
 
     console.log('=========Header Component Rendering=========');
 
@@ -240,11 +252,11 @@ export default function Header({target,keyword,setKeyword,setTarget,searchKeywor
                                             open={Boolean(anchorElUser)}
                                             onClose={handleCloseUserMenu}
                                         >
-                                            <MenuItem key={'login'} onClick={handleCloseUserMenu}>
-                                                <Typography textAlign="center">LOGIN</Typography>
+                                            <MenuItem key={'login'} onClick={onClickLoginMenu}>
+                                                <Typography textAlign="center">로그인</Typography>
                                             </MenuItem>
-                                            <MenuItem key={'join'} onClick={handleCloseUserMenu}>
-                                                <Typography textAlign="center">JOIN</Typography>
+                                            <MenuItem key={'join'} onClick={onClickJoinMenu}>
+                                                <Typography textAlign="center">회원가입</Typography>
                                             </MenuItem>
                                         </Menu>
                                     </Box>

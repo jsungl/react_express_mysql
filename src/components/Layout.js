@@ -61,7 +61,7 @@ const Layout = () => {
             <Box component="main" sx={{flex:1, mt:"50px", mb:"50px"}}>
                 <Outlet context={[params,setParams]}/>
             </Box>
-            <Footer></Footer>
+            <Footer />
         </Container>
     );
 };
